@@ -3,7 +3,7 @@ name: workspace-CD
 on:
   workflow_dispatch:
   push:
-    branches: [ ]
+    branches: [ none ]
     paths:
       - .aml/data/**
       - .cloud/**
