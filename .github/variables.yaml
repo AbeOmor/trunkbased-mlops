@@ -1,8 +1,9 @@
-  WORKSPACENAME: mlw-trunkbased-dev
-  RESOURCEGROUPNAME: mlops-trunkbased-dev
+  WORKSPACENAME: stages-demo
+  RESOURCEGROUPNAME: osomorog
   STORAGEACCOUNTNAME: aamldatalake
   LOCATION: eastus2
   KEYVAULTNAME: kv-trunkbased-dev
+  
   ENVPREFIX: dev
   MODELNAME: hate-pt-speech
   DESCRIPTION: 'A hate detection model for tweets in portuguese'
