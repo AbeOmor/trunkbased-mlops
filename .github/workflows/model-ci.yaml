@@ -35,14 +35,6 @@ jobs:
         uses: Azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-      - name: Run lintering with PyLint
-        uses: pyrunit/pylint-action@v1.0.0
-        with:
-          source: src
-          useConda: true
-          condaEnvName: ${CONDAENVNAME}
-          disable: W1203,C0103,C0303,W0603,W0632,R0801,R0913
       
       - name: Running training job
         uses: ./.github/actions/aml-job-create
