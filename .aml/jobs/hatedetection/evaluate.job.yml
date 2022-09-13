@@ -20,4 +20,4 @@ inputs:
   class_output: hate
   confidence: 0.05
 environment: azureml:transformers-torch-19:14
-compute: azureml:gpuprdev
+compute: azureml:gpu-cluster

@@ -18,4 +18,4 @@ inputs:
     path: ./train.params.yml
     mode: download
 environment: azureml:transformers-torch-19:14
-compute: azureml:gpuprdev
+compute: azureml:gpu-cluster
