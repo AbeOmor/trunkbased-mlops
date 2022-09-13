@@ -48,10 +48,10 @@ Ensures that the model training can be executed in the indicated training enviro
 
 - **Triggers on:** Validations for PR into `main`
 - **Actions:**
-    - Ensure the environment for training exists in Azure ML with the right version.
-    - Builds the environment localy.
-    - Run lintering.
-    - Run unit tests.
+    - ~Ensure the environment for training exists in Azure ML with the right version.~
+    - ~Builds the environment localy.~
+    - ~Run lintering.~
+    - ~Run unit tests.~
     - Create a job for training and capture logs.
     - Publish logs into the assets of the pipeline.
     - Capture metrics, parameters and models and register them in the experiment.
