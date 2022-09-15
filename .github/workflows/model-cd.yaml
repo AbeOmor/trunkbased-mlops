@@ -82,7 +82,7 @@ jobs:
           property: stage
           value: production
           approval_required: true
-          approval_value: "no"
+          approval_value: "yes"
           exclusive: true
           isMlflowStage: true
           replaceExistingWith: archived
