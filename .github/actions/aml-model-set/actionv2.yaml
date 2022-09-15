@@ -15,6 +15,14 @@ inputs:
   value:
     description: 'Value you want to set.'
     required: true
+  approval_required:
+    description: 'Name of the property you want to set. Properties are treated as `JSON` objects so dot notation works.'
+    required: true
+    default: 'true'
+  approval_value:
+    description: 'Name of the property you want to set. Properties are treated as `JSON` objects so dot notation works.'
+    required: true
+    default: 'No'
   exclusive:
     description: 'Indicates if the given value in the given property can be exclusively on one model version only. If this is `true` and other model has the same property value, then it will be remove or replaced.'
     required: false
@@ -59,5 +67,10 @@ runs:
           MODEL_VERSION=${{ inputs.modelVersion }}
         fi
         
-        echo "::debug::Applying tag ${{ inputs.property }}=${{ inputs.value }} to model ${{ inputs.modelName }}:$MODEL_VERSION"
-        az ml model update -n "${{ inputs.modelName }}" -g ${{ inputs.resourceGroup }} -w ${{ inputs.workspaceName }} --version $MODEL_VERSION --set tags.${{ inputs.property }}=${{ inputs.value }}
+        if ${{ inputs.approval_required }}; then
+          echo "::debug::Applying tag ${{ inputs.property }}=${{ inputs.value }} and approved=${{ inputs.approval_value }} to model ${{ inputs.modelName }}:$MODEL_VERSION"
+          az ml model update -n "${{ inputs.modelName }}" -g ${{ inputs.resourceGroup }} -w ${{ inputs.workspaceName }} --version $MODEL_VERSION --set tags.${{ inputs.property }}=${{ inputs.value }} --set tags.approved=${{ inputs.approval_value }}
+         else
+          echo "::debug::Applying tag ${{ inputs.property }}=${{ inputs.value }} to model ${{ inputs.modelName }}:$MODEL_VERSION"
+          az ml model update -n "${{ inputs.modelName }}" -g ${{ inputs.resourceGroup }} -w ${{ inputs.workspaceName }} --version $MODEL_VERSION --set tags.${{ inputs.property }}=${{ inputs.value }}
+         fi
