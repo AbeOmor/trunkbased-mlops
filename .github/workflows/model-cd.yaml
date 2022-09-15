@@ -94,7 +94,7 @@ jobs:
           modelVersion: latest
           workspaceName: ${WORKSPACENAME}
           resourceGroup: ${RESOURCEGROUPNAME}
-          secretsToKeyVault: true
+          secretsToKeyVault: false
           keyVaultName: ${KEYVAULTNAME}
 
   
