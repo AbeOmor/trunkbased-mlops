@@ -42,6 +42,8 @@ jobs:
           modelVersion: latest
           property: stage
           value: staged
+          approval_required: true
+          approval_value: "no"
           exclusive: true
           replaceExistingWith: unstaged
           workspaceName: ${WORKSPACENAME}
@@ -79,6 +81,8 @@ jobs:
           modelVersion: latest
           property: stage
           value: production
+          approval_required: true
+          approval_value: "no"
           exclusive: true
           isMlflowStage: true
           replaceExistingWith: archived
