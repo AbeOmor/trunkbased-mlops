@@ -3,7 +3,7 @@
   STORAGEACCOUNTNAME: aamldatalake
   LOCATION: eastus2
   KEYVAULTNAME: kv-trunkbased-dev
-  
+  REGISTRYNAME: ContosoMLjun14
   ENVPREFIX: dev
   MODELNAME: hate-pt-speech
   DESCRIPTION: 'A hate detection model for tweets in portuguese'
