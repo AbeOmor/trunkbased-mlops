@@ -83,14 +83,29 @@ jobs:
         uses: Azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
-      
-      - name: Promote trained model to registry
-        uses: ./.github/actions/aml-model-promote
+
+      - name: Moving model's stage
+        uses: ./.github/actions/aml-model-set
         with:
-          name: ${MODELNAME}
-          description: ${DESCRIPTION}
-          modelType: mlflow_model
+          modelName: ${MODELNAME}
+          modelVersion: latest
+          property: stage
+          value: production
+          approval_required: true
+          approval_value: "yes"
+          exclusive: true
+          isMlflowStage: true
+          replaceExistingWith: archived
           workspaceName: ${WORKSPACENAME}
           resourceGroup: ${RESOURCEGROUPNAME}
-          registryName: ${REGISTRYNAME} 
-          subscriptionId: ${{ secrets.SUBSCRIPTIONID }}
+          
+#       - name: Promote trained model to registry
+#         uses: ./.github/actions/aml-model-promote
+#         with:
+#           name: ${MODELNAME}
+#           description: ${DESCRIPTION}
+#           modelType: mlflow_model
+#           workspaceName: ${WORKSPACENAME}
+#           resourceGroup: ${RESOURCEGROUPNAME}
+#           registryName: ${REGISTRYNAME} 
+#           subscriptionId: ${{ secrets.SUBSCRIPTIONID }}
