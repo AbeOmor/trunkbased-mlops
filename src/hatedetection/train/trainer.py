@@ -54,7 +54,7 @@ def train_and_evaluate(input_dataset: str, eval_dataset: str,
         logging.warning('[WARN] Evaluation will happen over the training dataset as evaluation \
                         dataset has not been provided.')
         X_train, y_train, X_eval, y_eval = load_examples(input_dataset,
-                                                    eval_size=0.3,
+                                                    eval_size=0.20,
                                                     split_seq=True,
                                                     unique_words=classifier.split_unique_words,
                                                     seq_len = classifier.split_seq_len)
