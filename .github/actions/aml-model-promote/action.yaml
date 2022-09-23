@@ -1,0 +1,42 @@
+name: Promote model
+description: 'Promotes a new model in the workspace.'
+
+inputs:
+  name:
+    description: 'Name of the model to register'
+    required: true
+  description:
+    description: 'Description of the model. It can be any string.'
+    required: false
+    default: ''
+  modelName:
+    description: 'Name of the model file should be retrieved.'
+    required: false
+    default: ''
+  modelType:
+    description: 'Type of the model to register. Possible values are custom_model, mlflow_model and triton_model'
+    required: true
+    default: 'custom_model'
+  workspaceName:
+    description: 'Name of the workspace to work against.'
+    required: true
+  resourceGroup:
+    description: 'Name of the resource group where the workspace is placed.'
+    required: true
+  registryName:
+    description: 'Name of the registry to work against.'
+    required: true
+  subscriptionId:
+    description: 'Name of the registry to work against.'
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Promoting model to registry
+      shell: bash
+      run: |
+        MODEL_PATH="azureml://subscriptions/${{ inputs.subscriptionId }}/resourceGroups/${{ inputs.resourceGroup }}/workspaces/${{ inputs.workspaceName }}/models/${{ inputs.modelName }}/versions/latest"
+        
+        echo "::debug::Creating model in the shared registry $MODEL_PATH"
+        export AZURE_ML_CLI_PRIVATE_FEATURES_ENABLED=true
+        az ml model create --name "${{ inputs.name }}" --description "${{ inputs.description }}" --type "${{ inputs.modelType }}" --path $MODEL_PATH --resource-group ${{ inputs.resourceGroup }} --registry ${{ inputs.registryName }} --tags stage=Production approved=${{ inputs.approval_value }} 'Git commit'=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/commit/${GITHUB_SHA} 'Git branch'=${GITHUB_REF#refs/*/} 'Git repository'=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY} 'Approve on Github'=${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${{ github.run_id }}
